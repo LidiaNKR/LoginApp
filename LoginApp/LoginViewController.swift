@@ -12,65 +12,68 @@ class LoginViewController: UIViewController {
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var userPasswordTextField: UITextField!
     
+    private let user = "Lidiia"
+    private let password = "12345"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.layer.contents = #imageLiteral(resourceName: "login").cgImage
-        
-        let eyeTextFieldImageView = UIImageView(frame: CGRect(x: 8.0, y: 12.0, width: 20.0, height: 20.0))
-        let image = UIImage(systemName: "eye")
-        eyeTextFieldImageView.image = image
-            userPasswordTextField.rightViewMode = .always
-            userPasswordTextField.rightView = eyeTextFieldImageView
-            userPasswordTextField.tintColor = .gray
+  
+//        userPasswordTextField.rightViewMode = .always
+//        let image = UIImage(systemName: "eye")
+//        let eyeTextFieldImageView = UIImageView(frame: CGRect(x: -20.0, y: 12.0, width: 20.0, height: 20.0))
+//        eyeTextFieldImageView.image = image
+//            userPasswordTextField.rightView = eyeTextFieldImageView
+//            userPasswordTextField.tintColor = .gray
 
     }
     
     @IBAction func logInButtonPressed() {
-        guard let inputUserName = userNameTextField.text, !inputUserName.isEmpty else {
-            showAlert(with: "User Name is empty", and: "Please enter your name")
+        if userNameTextField.text != user || userPasswordTextField.text != password {
+            showAlert(title: "Invalid login or password",
+                      message: "Please, enter your correct login and password",
+                      textField: userPasswordTextField)
             return
         }
-        
-        guard let inputUserPassword = userPasswordTextField.text, !inputUserPassword.isEmpty else {
-            showAlert(with: "User Password is empty", and: "Please enter your password")
-            return
-        }
-        
-        if let _ = Double(inputUserName) {
-            showAlert(with: "Wrong format", and: "Please enter your name")
-            return
-        }
-        userNameTextField.text = inputUserName
-        
-        //        if userNameTextField && userPasswordTextField {
-        //            showAlert(with: "Wrong format", and: "Please enter your name")
-        //            return
-        //        }
-        //        userNameTextField.text = inputUserName
     }
-    
-    
     
 // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-        guard let user = userNameTextField.text else { return }
         welcomeVC.userName = "Hello, \(user)!"
     }
 }
 
 // MARK: - Alert Controller
 extension LoginViewController {
-    private func showAlert(with title: String, and message: String) {
+    private func showAlert(title: String, message: String, textField: UITextField? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            self.userNameTextField.text = ""
+            textField?.text = nil
         }
         alert.addAction(okAction)
         present(alert, animated: true)
     }
     
+}
+
+// MARK: - Keyboard
+extension LoginViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == userNameTextField {
+            userPasswordTextField.becomeFirstResponder()
+        } else {
+            logInButtonPressed()
+        }
+        return true
+        
+    }
 }
 
 

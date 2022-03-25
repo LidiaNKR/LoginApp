@@ -27,6 +27,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" textContentType="name"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="YZe-y5-N19"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LEA-aM-9cy">
                                                 <rect key="frame" x="0.0" y="50" width="300" height="34"/>
@@ -34,6 +37,9 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="bpo-Yy-Rda"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -79,8 +85,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="JeW-Ps-TJD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ke3-eW-26G"/>
                             <constraint firstItem="JeW-Ps-TJD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iLS-SR-EWu"/>
-                            <constraint firstItem="JeW-Ps-TJD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="lcn-VY-vlO"/>
                         </constraints>
                     </view>
                     <connections>
