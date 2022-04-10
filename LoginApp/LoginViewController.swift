@@ -18,17 +18,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.layer.contents = #imageLiteral(resourceName: "login").cgImage
-  
-//        userPasswordTextField.rightViewMode = .always
-//        let image = UIImage(systemName: "eye")
-//        let eyeTextFieldImageView = UIImageView(frame: CGRect(x: -20.0, y: 12.0, width: 20.0, height: 20.0))
-//        eyeTextFieldImageView.image = image
-//            userPasswordTextField.rightView = eyeTextFieldImageView
-//            userPasswordTextField.tintColor = .gray
-
+        let catImage = #imageLiteral(resourceName: "login").cgImage
+        view.layer.contents = catImage
     }
     
+    // MARK: - Navigation
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
+            welcomeVC.userName = "Hello, \(user)!"
+        }
+    
+    // MARK: - IBActions
     @IBAction func logInButtonPressed() {
         if userNameTextField.text != user || userPasswordTextField.text != password {
             showAlert(title: "Invalid login or password",
@@ -36,13 +36,24 @@ class LoginViewController: UIViewController {
                       textField: userPasswordTextField)
             return
         }
+        performSegue(withIdentifier: "ShowWelcomeWC", sender: nil)
     }
     
-// MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-        welcomeVC.userName = "Hello, \(user)!"
+    @IBAction func forgotUserNameButton() {
+        showAlert(title: "Ooops",
+                  message: "Your name is \(user)")
     }
+    
+    @IBAction func forgotPasswordButton() {
+        showAlert(title: "Ooops",
+                  message: "Your password is \(password)")
+    }
+    
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        userNameTextField.text = nil
+        userPasswordTextField.text = nil
+    }
+    
 }
 
 // MARK: - Alert Controller
@@ -55,7 +66,6 @@ extension LoginViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
 }
 
 // MARK: - Keyboard
@@ -76,5 +86,12 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
+
+//        userPasswordTextField.rightViewMode = .always
+//        let image = UIImage(systemName: "eye")
+//        let eyeTextFieldImageView = UIImageView(frame: CGRect(x: -20.0, y: 12.0, width: 20.0, height: 20.0))
+//        eyeTextFieldImageView.image = image
+//            userPasswordTextField.rightView = eyeTextFieldImageView
+//            userPasswordTextField.tintColor = .gray
 
 
