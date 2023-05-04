@@ -8,13 +8,15 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
+
+    // MARK: - IB Outlets
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var userPasswordTextField: UITextField!
     
-    private let user = "Lidiia"
-    private let password = "12345"
+    // MARK: - Private properties
+    private let user = DataManager.shared.user
     
+    // MARK: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,13 +26,21 @@ class LoginViewController: UIViewController {
     
     // MARK: - Navigation
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-            welcomeVC.userName = "Hello, \(user)!"
+            let tabBarController = segue.destination as! UITabBarController
+            guard let viewControllers = tabBarController.viewControllers else { return }
+            for viewController in viewControllers {
+                if let welcomeViewController = viewController as? WelcomeViewController {
+                    welcomeViewController.user = user
+                } else if let navigationViewController = viewController as? UINavigationController {
+                    let aboutUserViewController = navigationViewController.topViewController as! AboutUserViewController
+                    aboutUserViewController.user = user
+                }
+            }
         }
     
     // MARK: - IBActions
     @IBAction func logInButtonPressed() {
-        if userNameTextField.text != user || userPasswordTextField.text != password {
+        if userNameTextField.text != user.login || userPasswordTextField.text != user.password {
             showAlert(title: "Invalid login or password",
                       message: "Please, enter your correct login and password",
                       textField: userPasswordTextField)
@@ -41,12 +51,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func forgotUserNameButton() {
         showAlert(title: "Ooops",
-                  message: "Your name is \(user)")
+                  message: "Your name is \(user.login)")
     }
     
     @IBAction func forgotPasswordButton() {
         showAlert(title: "Ooops",
-                  message: "Your password is \(password)")
+                  message: "Your password is \(user.password)")
     }
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
@@ -56,7 +66,7 @@ class LoginViewController: UIViewController {
     
 }
 
-// MARK: - Alert Controller
+    // MARK: - Alert Controller
 extension LoginViewController {
     private func showAlert(title: String, message: String, textField: UITextField? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -68,7 +78,7 @@ extension LoginViewController {
     }
 }
 
-// MARK: - Keyboard
+    // MARK: - Keyboard
 extension LoginViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
