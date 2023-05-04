@@ -16,7 +16,7 @@
 
 ![product-screenshot](Images/Second.png)
 
-4. Экран фотографией котика и его личной инофрмацией:
+4. Экран c фотографией котика и его личной инофрмацией:
 
 ![product-screenshot](Images/Description.png)
 
