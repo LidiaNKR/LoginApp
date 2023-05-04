@@ -17,6 +17,9 @@ class WelcomeViewController: UIViewController {
     var user: User!
     
     // MARK: - Private properties
+    private let gradient = CAGradientLayer()
+    
+    // MARK: - Private properties
     private let firstColor = UIColor(red: 200/250,
                                      green: 200/250,
                                      blue: 200/250,
@@ -39,13 +42,13 @@ class WelcomeViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         userPhotoUIImage.layer.cornerRadius = userPhotoUIImage.frame.width / 2
+        gradient.frame = view.bounds
     }
 }
 
     // MARK: - Set background color
 extension WelcomeViewController {
     func addVerticalGradientLayer(topColor: UIColor, buttomColor: UIColor) {
-        let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         gradient.colors = [topColor.cgColor, buttomColor.cgColor]
         gradient.locations = [0.0, 1.0]

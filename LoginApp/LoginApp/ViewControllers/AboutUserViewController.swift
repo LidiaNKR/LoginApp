@@ -18,6 +18,7 @@ class AboutUserViewController: UIViewController {
     // MARK: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = user.person.fullname
         mainButton.layer.cornerRadius = 10
     }

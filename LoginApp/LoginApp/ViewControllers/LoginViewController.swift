@@ -20,8 +20,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let catImage = #imageLiteral(resourceName: "login").cgImage
-        view.layer.contents = catImage
+        view.layer.contents = #imageLiteral(resourceName: "login").cgImage
     }
     
     // MARK: - Navigation

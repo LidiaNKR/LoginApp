@@ -11,7 +11,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - IB Outlets
     @IBOutlet var userPhotoImageView: UIImageView!
-    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var descriptionTextView: UITextView!
     
     // MARK: - Public properties
     var user: User!
@@ -19,8 +19,11 @@ class DetailViewController: UIViewController {
     // MARK: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        tabBarController?.tabBar.isHidden = true
+        
         userPhotoImageView.image = user.person.information.photo
-        descriptionLabel.text = user.person.information.description
+        descriptionTextView.text = user.person.information.description
     }
     
     override func viewWillLayoutSubviews() {
