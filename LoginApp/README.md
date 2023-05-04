@@ -6,19 +6,19 @@
 1. Экран для ввода логина (User) и пароля (12345). В случе некорректного ввода логина/пароля высвечивается соответствующее собщение об ошибке. 
 Посмотреть корректные логин и пароль можно тапнув по соотвествующим кнопкам на экране:
 
-![product-screenshot](Images/Login.png)
+![product-screenshot](LoginApp/Images/Login.png)
 
 2. Экран приветствия с функцией выхода из личного профиля:
 
-![product-screenshot](Images/Welcome.png)
+![product-screenshot](LoginApp/Images/Welcome.png)
 
 3. Экран с кнопкой, благодаря которой осуществляется переход к профилю с более подробной информайей о котике:
 
-![product-screenshot](Images/Second.png)
+![product-screenshot](LoginApp/Images/Second.png)
 
 4. Экран c фотографией котика и его личной инофрмацией:
 
-![product-screenshot](Images/Description.png)
+![product-screenshot](LoginApp/Images/Description.png)
 
 # Используемый стек технологий
 - Язык программирования - `Swift`
