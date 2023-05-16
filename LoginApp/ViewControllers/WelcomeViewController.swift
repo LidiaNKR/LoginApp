@@ -20,11 +20,14 @@ class WelcomeViewController: UIViewController {
     private let gradient = CAGradientLayer()
     
     // MARK: - Private properties
+    
+    ///Значение первоначального цвета для градиента
     private let firstColor = UIColor(red: 200/250,
                                      green: 200/250,
                                      blue: 200/250,
                                      alpha: 1)
     
+    ///Значение окончательного цвета для градиента
     private let secondColor = UIColor(red: 250/250,
                                      green: 250/250,
                                      blue: 250/250,
@@ -48,6 +51,8 @@ class WelcomeViewController: UIViewController {
 
     // MARK: - Set background color
 extension WelcomeViewController {
+    
+    ///Настройка градиента
     func addVerticalGradientLayer(topColor: UIColor, buttomColor: UIColor) {
         gradient.frame = view.bounds
         gradient.colors = [topColor.cgColor, buttomColor.cgColor]

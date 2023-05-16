@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             let tabBarController = segue.destination as! UITabBarController
             guard let viewControllers = tabBarController.viewControllers else { return }
+
             for viewController in viewControllers {
                 if let welcomeViewController = viewController as? WelcomeViewController {
                     welcomeViewController.user = user
@@ -38,6 +39,8 @@ class LoginViewController: UIViewController {
         }
     
     // MARK: - IBActions
+    
+    ///Проверка валидности введенных логина и пароля
     @IBAction func logInButtonPressed() {
         if userNameTextField.text != user.login || userPasswordTextField.text != user.password {
             showAlert(title: "Invalid login or password",
@@ -48,16 +51,19 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "ShowWelcomeWC", sender: nil)
     }
     
+    ///Отображение забытого логина с помощью всплывающего окна
     @IBAction func forgotUserNameButton() {
         showAlert(title: "Ooops",
                   message: "Your name is \(user.login)")
     }
     
+    ///Отображение забытого пароля с помощью всплывающего окна
     @IBAction func forgotPasswordButton() {
         showAlert(title: "Ooops",
                   message: "Your password is \(user.password)")
     }
     
+    ///Удаление логина и пароля из текстовых полей, при возвращении на экран логина
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         userNameTextField.text = nil
         userPasswordTextField.text = nil
@@ -67,6 +73,8 @@ class LoginViewController: UIViewController {
 
     // MARK: - Alert Controller
 extension LoginViewController {
+    
+    ///Отображение всплывающего окна
     private func showAlert(title: String, message: String, textField: UITextField? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
@@ -79,11 +87,14 @@ extension LoginViewController {
 
     // MARK: - Keyboard
 extension LoginViewController: UITextFieldDelegate {
+    
+    ///Скрываем клавиатуру при тапе за пределеами текстовых полей
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
-    
+
+    ///Переносим курсор на следующее тектовое поле
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == userNameTextField {
             userPasswordTextField.becomeFirstResponder()
@@ -91,10 +102,9 @@ extension LoginViewController: UITextFieldDelegate {
             logInButtonPressed()
         }
         return true
-        
+
     }
 }
-
 
 //        userPasswordTextField.rightViewMode = .always
 //        let image = UIImage(systemName: "eye")

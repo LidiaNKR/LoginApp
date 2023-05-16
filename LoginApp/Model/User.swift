@@ -7,22 +7,26 @@
 
 import UIKit
 
+/// Учетная запись
 struct User {
     let login: String
     let password: String
     let person: Person
 }
 
+/// Персональные данные
 struct Person {
     let name: String
     let surname: String
     let information: Info
     
+    /// Молные имя и фамилия пользователя
     var fullname: String {
         "\(name) \(surname)"
     }
 }
 
+/// Поднобная информация о пользователе
 struct Info {
     let photo: UIImage
     let age: Int
@@ -30,6 +34,7 @@ struct Info {
     let hobbies: String
     let moreInfo: String
     
+    //Описание информации о пользователе
     var description: String {
         """
         Мой возраст: \(age) лет

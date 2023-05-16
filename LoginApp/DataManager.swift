@@ -10,6 +10,7 @@ import Foundation
 class DataManager {
     static let shared = DataManager()
     
+    ///Описание информации о пользователе
     var user: User = User(login: "User",
                           password: "12345",
                           person: Person(name: "Лакки",
